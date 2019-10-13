@@ -1,96 +1,116 @@
-$( document ).ready(function(){
-    var Random=Math.floor(Math.random()*101+19)
-    // Selects a random number to be shown at the start of the game
-    // Number should be should be between 19 - 120
-    //
-    $('#randomNumber').text(Random);
-    // Appending random number to the randomNumber id in the html doc
-    //
-    var num1= Math.floor(Math.random()*11+1)
-    var num2= Math.floor(Math.random()*11+1)
-    var num3= Math.floor(Math.random()*11+1)
-    var num4= Math.floor(Math.random()*11+1)
-    // Setting up random numbers for each jewel
+    // Create a parent function that generates a random number between 19 & 120
+
+$(document) . ready (function() {
+    let Random = Math.floor (Math.random () * 101 + 19);
+
+    // Print random number from above function to the computerNumber class
+
+    $(".computerNumber").text("Number to Match: " + Random);
+    
+
+    //Declare variables, use 'let' instead of 'var' 
+
+    let wins = 0;
+    let losses = 0;
+    let userTotal = 0; 
+
+
+    // Generate random numbers for each clickable gem
     // Random number has to be between 1 - 12
-    // 
-    var userTotal= 0; 
-    var wins= 0;
-    var losses = 0;
-    //  Decaring variables for tallies
-  $('#numberWins').text(wins);
-  $('#numberLosses').text(losses);
-  //resets the game
+    // Console log to make sure they are working correctly
+
+  let num1 = Math.floor(Math.random()*11+1);
+  let num2 = Math.floor(Math.random()*11+1);
+  let num3 = Math.floor(Math.random()*11+1);
+  let num4 = Math.floor(Math.random()*11+1);
+  console.log(num1, num2, num3, num4)
+
+    //use .text to print into the win/loss divs
+
+  $(".userWins").text("Wins: " + wins);
+  $(".userLosses").text("Losses: " + losses);
+
+  // Create a function to reset 
+
   function reset(){
         Random=Math.floor(Math.random()*101+19);
         console.log(Random)
-        $('#randomNumber').text(Random);
+        $(".computerNumber").text(Random);
         num1= Math.floor(Math.random()*11+1);
         num2= Math.floor(Math.random()*11+1);
         num3= Math.floor(Math.random()*11+1);
         num4= Math.floor(Math.random()*11+1);
         userTotal= 0;
-        $('#finalTotal').text(userTotal);
+        $('.resultsDiv').text(userTotal);
         } 
-  //adds the wins to the userTotal
-  function yay(){
+
+  //print +1 win to the userTotal
+  function good(){
   alert("You won!");
     wins++; 
-    $('#numberWins').text(wins);
+    $('.userWins').text(" Wins: " + wins);
     reset();
   }
-  //addes the losses to the userTotal
-  function loser(){
+
+  //print +1 loss to the userTotal
+  function bad(){
   alert ("You lose!");
     losses++;
-    $('#numberLosses').text(losses);
+    $('.userLosses').text("Losses: " + losses);
     reset()
   }
-  //sets up click for jewels
-    $('#one').on ('click', function(){
+
+  //set up on click event for each crystal
+    //set win/loss conditionals
+
+    $('.crystalOne').on ('click', function(){
       userTotal = userTotal + num1;
       console.log("New userTotal= " + userTotal);
-      $('#finalTotal').text(userTotal); 
-            //sets win/lose conditions
-          if (userTotal == Random){
-            yay();
+      $('.resultsDiv').text(userTotal); 
+
+          if (userTotal === Random){
+            good();
           }
           else if ( userTotal > Random){
-            loser();
+            bad();
           }   
-    })  
-    $('#two').on ('click', function(){
+    }) 
+
+    $('.crystalTwo').on ('click', function(){
       userTotal = userTotal + num2;
       console.log("New userTotal= " + userTotal);
-      $('#finalTotal').text(userTotal); 
-          if (userTotal == Random){
-            yay();
+      $('.resultsDiv').text(userTotal); 
+          if (userTotal === Random){
+            good();
           }
           else if ( userTotal > Random){
-            loser();
+            bad();
           } 
-    })  
-    $('#three').on ('click', function(){
+    })
+
+    $('.crystalThree').on ('click', function(){
       userTotal = userTotal + num3;
       console.log("New userTotal= " + userTotal);
-      $('#finalTotal').text(userTotal);
-  //sets win/lose conditions
-            if (userTotal == Random){
-            yay();
+      $('.resultsDiv').text(userTotal);
+
+            if (userTotal === Random){
+            good();
           }
           else if ( userTotal > Random){
-            loser();
+            bad();
           } 
-    })  
-    $('#four').on ('click', function(){
+    })
+
+    $('.crystalFour').on ('click', function(){
       userTotal = userTotal + num4;
       console.log("New userTotal= " + userTotal);
-      $('#finalTotal').text(userTotal); 
+      $('.resultsDiv').text(userTotal); 
         
-            if (userTotal == Random){
-            yay();
+            if (userTotal === Random){
+            good();
           }
           else if ( userTotal > Random){
-            loser();
+            bad();
           }
     });   
   }); 
